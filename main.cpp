@@ -6,6 +6,8 @@
 #include <cstring>
 #include <ctime>
 
+#include <sprawdz.cpp>
+
 using namespace std;
 
 
@@ -122,7 +124,7 @@ int Losowanie(){
 		cout << "Nastepnym razem Ci sie uda!!!" << endl;
 	}
 	
-	int sprawdz(); 
+	sprawdz(); 
     return 0;
 }
 
