@@ -6,7 +6,7 @@
 #include <cstring>
 #include <ctime>
 
-#include <sprawdz.cpp>
+#include 'sprawdz.cpp'
 
 using namespace std;
 
