@@ -10,19 +10,20 @@
 
 using namespace std;
 
+int KontoGracza = 100;
+int KontoKasyna = 1000;
 
 void OProgramie();
 void Menu();
-int StanKasyno(int* );
-int StanGracz(int* );
+int StanKasyno(int KontoKasyna);
+int StanGracz(int KontoGracza);
 int Czysc();
 void Zasady();
 int Losowanie();
 
 int main(){
 	int n;
-	int PlCash = 100;
-	int CasCash = 1000;
+
 
 
 
@@ -41,10 +42,10 @@ int main(){
 							Zasady();
 							break;
 					case 3: Czysc();
-							StanGracz(&PlCash);
+							StanGracz(KontoGracza);
 							break;
 					case 4: Czysc();
-							StanKasyno(&CasCash);
+							StanKasyno(KontoKasyna);
 							break;
 					case 5: Czysc();
 							OProgramie();
@@ -73,12 +74,12 @@ int Czysc(){
 	system("cls");
 }
 
-int StanKasyno(int *a){
-	cout << "Stan konta kasyna: " << *a << "\n-----------------\n";
+int StanKasyno(int a){
+	cout << "Stan konta kasyna: " << a << "\n-----------------\n";
 }
 
-int StanGracz(int *a){
-	cout << "Stan konta gracza: " << *a << "\n--------------------\n";
+int StanGracz(int a){
+	cout << "Stan konta gracza: " << a << "\n--------------------\n";
 }
 
 void OProgramie(){
@@ -123,8 +124,9 @@ int Losowanie(){
 	}else{
 		cout << "Nastepnym razem Ci sie uda!!!" << endl;
 	}
-	
-	sprawdz(); 
+
+	sprawdz();
     return 0;
 }
+
 
