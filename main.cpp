@@ -6,7 +6,7 @@
 #include <cstring>
 #include <ctime>
 
-//#include "sprawdz.cpp"
+//Mikołaj Porębski, Arek Kopczyński klasa 3B1T
 
 using namespace std;
 
@@ -24,6 +24,7 @@ void sprawdzKoniec();
 
 int Pojedyncza(int pojedyncza, int Pula);
 int PrzystaNieparzysta(int parzysta, int Pula);
+int Tuziny(int Pula);
 
 
 
@@ -139,7 +140,6 @@ srand(time(NULL));
 	int n;
 	int pojedyncza;
 	int parzysta;
-	int tuzin;
 	int liczba1, liczba2, liczba3;
 	int liczba4, liczba5;
 
@@ -163,8 +163,8 @@ srand(time(NULL));
                     sprawdzKoniec();
 					break;
 			case 3:
-                    cout << "Wprowadz jeden z tuzinow" << endl;
-					cin >> tuzin;
+                    Tuziny(Pula);
+                    sprawdzKoniec();
 					break;
 			case 4:
                     cout << "Wprowadz 3 liczby obok siebie" << endl;
@@ -200,8 +200,8 @@ int Pojedyncza(int Pojedyncza, int Pula){
 
 	if (losowana==0){
         cout << "Przegrales czlowieku" << endl;
-        KontoGracza -= WygranaPojedyncza;
-        KontoKasyna += WygranaPojedyncza;
+        KontoGracza -= Pula;
+        KontoKasyna += Pula;
 	}else{
 	    if(Pojedyncza == losowana){
             cout << "Wygrales czlowieku" << endl;
@@ -209,8 +209,8 @@ int Pojedyncza(int Pojedyncza, int Pula){
             KontoKasyna -= WygranaPojedyncza;
         }else{
             cout << "Przegrales czlowieku" << endl;
-            KontoGracza -= WygranaPojedyncza;
-            KontoKasyna += WygranaPojedyncza;
+            KontoGracza -= Pula;
+            KontoKasyna += Pula;
         }
 	}
 
@@ -223,7 +223,7 @@ int Pojedyncza(int Pojedyncza, int Pula){
 int PrzystaNieparzysta(int PrzystaNieparzysta, int Pula){
 
     int losowana;
-    losowana = rand()%38;
+    losowana = rand()%37;
 
 	int Wygrana;
     int liczba;
@@ -245,8 +245,8 @@ int PrzystaNieparzysta(int PrzystaNieparzysta, int Pula){
                 KontoKasyna -= Wygrana;
             }else{
                 cout<<"przegrywasz"<<endl;
-                KontoGracza -= Wygrana;
-                KontoKasyna += Wygrana;
+                KontoGracza -= Pula;
+                KontoKasyna += Pula;
             }
         }else{
             liczba = 0;
@@ -257,8 +257,8 @@ int PrzystaNieparzysta(int PrzystaNieparzysta, int Pula){
                 KontoKasyna -= Wygrana;
             }else{
                 cout<<"przegrywasz"<<endl;
-                KontoGracza -= Wygrana;
-                KontoKasyna += Wygrana;
+                KontoGracza -= Pula;
+                KontoKasyna += Pula;
             }
         }
 
@@ -271,6 +271,92 @@ int PrzystaNieparzysta(int PrzystaNieparzysta, int Pula){
 	return 0;
 }
 
+int Tuziny(int Pula){
+
+    int iletuzinow, TylkoJedenTuzin;
+    //zakladamy ze mozna obstawic tylko 1 tuzin
+    /*
+    do{
+        cout<<"Ile tuzinow chcesz obstawiac? 1 | 2 | 3? Wpisz liczbe"<<endl;
+        cin>>iletuzinow;
+    }while(iletuzinow<0 || iletuzinow>3);
+*/
+    iletuzinow =1 ;
+
+    if(iletuzinow==1){
+        cout<<"Wybierz tuzin do wyboru 1 | 2 | 3  wpisz cyfre \n 1 - (liczby 1-12) | 2 - (liczby - 13-24) | 3 - (liczby 25 - 36)"<<endl;
+        cin>>TylkoJedenTuzin;
+        cout<<"Wybrales "<<TylkoJedenTuzin<<" tuzin"<<endl;
+    }
+
+    int losowana;
+    losowana = rand()%37;
+
+	int Wygrana;
+    int liczba;
+	cout<<"Wylosowana liczba to: "<<losowana<<endl;
+
+	Wygrana = Pula*2 ;
+
+	if (losowana==0){
+        cout << "Przegrales czlowieku" << endl;
+        KontoGracza -= Wygrana;
+        KontoKasyna += Wygrana;
+	}else{
+        if(iletuzinow==1)
+        {
+            if(losowana>0 && losowana<13)
+            {
+                if(TylkoJedenTuzin == 1)
+                {
+                    cout<<"Wygrales"<<endl;
+                    KontoGracza += Wygrana;
+                    KontoKasyna -= Wygrana;
+                }else{
+                    cout<<"Przegrywasz"<<endl;
+                    KontoGracza -= Pula;
+                    KontoKasyna += Pula;
+                }
+
+            }
+            else if(losowana>12 && losowana<25)
+            {
+                if(TylkoJedenTuzin == 2)
+                {
+                    cout<<"Wygrales"<<endl;
+                    KontoGracza += Wygrana;
+                    KontoKasyna -= Wygrana;
+                }else{
+                    cout<<"Przegrywasz"<<endl;
+                    KontoGracza -= Pula;
+                    KontoKasyna += Pula;
+                }
+
+            }
+            else if(losowana>24 && losowana<37)
+            {
+                if(TylkoJedenTuzin == 3)
+                {
+                    cout<<"Wygrales"<<endl;
+                    KontoGracza += Wygrana;
+                    KontoKasyna -= Wygrana;
+                }else{
+                    cout<<"Przegrywasz"<<endl;
+                    KontoGracza -= Pula;
+                    KontoKasyna += Pula;
+                }
+
+            }
+        }
+
+    }
+
+	cout<<"\nTwoj aktualny stan konta:"<<KontoGracza<<endl;
+
+    return 0;
+}
+
+
 
 void sprawdzKoniec(){
 
@@ -282,3 +368,7 @@ void sprawdzKoniec(){
     }
 
 }
+
+
+
+
