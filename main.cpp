@@ -22,8 +22,8 @@ void Zasady();
 int Losowanie();
 void sprawdzKoniec();
 
-int Pojedyncza(int pojedyncza, int losowana, int Pula);
-
+int Pojedyncza(int pojedyncza, int Pula);
+int PrzystaNieparzysta(int parzysta, int Pula);
 
 
 
@@ -107,10 +107,6 @@ int Losowanie(){
 
 srand(time(NULL));
 
-int losowana;
-
-losowana = rand()%38;
-
 	//int Zaklad;
 //	cout << "Obstaw liczbe!!!" << endl;
 //	cin >> Zaklad;
@@ -155,12 +151,16 @@ losowana = rand()%38;
                         cout << "Wprowadz pojedyncza liczbe" << endl;
                         cin >> pojedyncza;
                     }while(pojedyncza<1 || pojedyncza>37);
-					Pojedyncza(pojedyncza, losowana, Pula);
+					Pojedyncza(pojedyncza, Pula);
                     sprawdzKoniec();
 					break;
-			case 2:
-                    cout << "Wprowadz parzysta lub nieparzysta" << endl;
-					cin >> parzysta;
+
+			case 2: do{
+                        cout << "Obstaw parzysta lub nieparzysta 0 - Parzysta, 1 - Nieparzysta" << endl;
+                        cin >> parzysta;
+                    }while(parzysta<0 || parzysta>1);
+					PrzystaNieparzysta(parzysta, Pula);
+                    sprawdzKoniec();
 					break;
 			case 3:
                     cout << "Wprowadz jeden z tuzinow" << endl;
@@ -187,7 +187,10 @@ losowana = rand()%38;
 
 
 
-int Pojedyncza(int Pojedyncza, int losowana, int Pula){
+int Pojedyncza(int Pojedyncza, int Pula){
+
+    int losowana;
+    losowana = rand()%38;
 
 	int WygranaPojedyncza;
 
@@ -196,7 +199,9 @@ int Pojedyncza(int Pojedyncza, int losowana, int Pula){
 	WygranaPojedyncza = Pula*35;
 
 	if (losowana==0){
-        cout << "Przegrałeś czlowieku" << endl;
+        cout << "Przegrales czlowieku" << endl;
+        KontoGracza -= WygranaPojedyncza;
+        KontoKasyna += WygranaPojedyncza;
 	}else{
 	    if(Pojedyncza == losowana){
             cout << "Wygrales czlowieku" << endl;
@@ -215,6 +220,58 @@ int Pojedyncza(int Pojedyncza, int losowana, int Pula){
 	return 0;
 }
 
+int PrzystaNieparzysta(int PrzystaNieparzysta, int Pula){
+
+    int losowana;
+    losowana = rand()%38;
+
+	int Wygrana;
+    int liczba;
+	cout<<"Wylosowana liczba to: "<<losowana<<endl;
+
+	Wygrana = Pula*1;
+
+	if (losowana==0){
+        cout << "Przegrales czlowieku" << endl;
+        KontoGracza -= Wygrana;
+        KontoKasyna += Wygrana;
+	}else{
+	    if(losowana%2){
+            liczba = 1;
+            cout<<"Liczba jest nieparzysta - ";
+            if(liczba == PrzystaNieparzysta){
+                cout<<"wygrywasz"<<endl;
+                KontoGracza += Wygrana;
+                KontoKasyna -= Wygrana;
+            }else{
+                cout<<"przegrywasz"<<endl;
+                KontoGracza -= Wygrana;
+                KontoKasyna += Wygrana;
+            }
+        }else{
+            liczba = 0;
+            cout<<"Liczba jest parzysta - ";
+            if(liczba == PrzystaNieparzysta){
+                cout<<"wygrywasz"<<endl;
+                KontoGracza += Wygrana;
+                KontoKasyna -= Wygrana;
+            }else{
+                cout<<"przegrywasz"<<endl;
+                KontoGracza -= Wygrana;
+                KontoKasyna += Wygrana;
+            }
+        }
+
+
+	}
+
+
+	cout<<"\nTwoj aktualny stan konta:"<<KontoGracza<<endl;
+
+	return 0;
+}
+
+
 void sprawdzKoniec(){
 
     if(KontoGracza<=0){
@@ -225,7 +282,3 @@ void sprawdzKoniec(){
     }
 
 }
-
-
-
-
