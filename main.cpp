@@ -22,9 +22,9 @@ void Zasady();
 int Losowanie();
 void sprawdzKoniec();
 
-int Pojedyncza(int pojedyncza, int Pula);
-int PrzystaNieparzysta(int parzysta, int Pula);
-int Tuziny(int Pula);
+int Pojedyncza(int pojedyncza);
+int PrzystaNieparzysta(int parzysta);
+void Tuziny();
 
 
 
@@ -77,6 +77,10 @@ int Czysc(){
 	system("cls");
 }
 
+void Pauza(){
+	system("pause");
+}
+
 int StanKasyno(int a){
 	cout << "Stan konta kasyna: " << a << "\n-----------------\n";
 }
@@ -104,66 +108,65 @@ void Menu(){
 	cout << "0. Przerwij dzialanie programu" << endl;
 }
 
-int Losowanie(){
+int Pula;
+int OpcjaLosowania;
 
-srand(time(NULL));
-
-	//int Zaklad;
-//	cout << "Obstaw liczbe!!!" << endl;
-//	cin >> Zaklad;
-	int Pula;
-	cout << "Podaj ile pieniedzy obstawiasz!!!" << endl;
-	cin >> Pula;
-
-	cout<<"\nAktualnie obstawiasz: "<<Pula<<" zetonow\n"<<endl;
-//	int Wygrana;
-/*	cout << "Wylosowales: " << losowana << endl;
-
-	if(losowana == Zaklad){
-		cout << "Brawo, to ta sama liczba!!!" << endl;
-		Wygrana = Pula * 35;
-		cout << "Tyle wygrales: " << Wygrana << endl;
-	}else{
-		cout << "Nastepnym razem Ci sie uda!!!" << endl;
-	}
-
-	sprawdz(); */
-
-
-			cout << "1 - Obstaw pojedyncza liczbe" << endl;
+void MenuLosowania(){
+		cout << "1 - Obstaw pojedyncza liczbe" << endl;
 			cout << "2 - Obstaw parzysta lub nieparzysta" << endl;
 			cout << "3 - Obstaw tuziny" << endl;
 			cout << "4 - Obstaw 3 liczby obok siebie" << endl;
 			cout << "5 - Obstaw 2 liczby obok siebie" << endl;
 			cout << "0 - Powrot / zmiana wysokosci zakladu" << endl;
+			cout << "Sposób zakladu" << endl;
+			cin >> OpcjaLosowania;
+			cout << "wprowadz ile siana" << endl;
+			cin >> Pula; 
+			Czysc();
+	
+	
+}
 
-	int n;
+
+int Losowanie(){
+
+srand(time(NULL));
+
+
+
+			
+
+	int PierwszaDowolna;
+	int DrugaDowolna;	
 	int pojedyncza;
 	int parzysta;
 	int liczba1, liczba2, liczba3;
 	int liczba4, liczba5;
 
 	do{
-		cin >> n;
+		MenuLosowania();
+		
 
-		switch(n){
-			case 1: do{
-                        cout << "Wprowadz pojedyncza liczbe" << endl;
-                        cin >> pojedyncza;
-                    }while(pojedyncza<1 || pojedyncza>37);
-					Pojedyncza(pojedyncza, Pula);
-                    sprawdzKoniec();
-					break;
+		switch(OpcjaLosowania){
+					case 1:
+						do{
+                        	cout << "Wprowadz pojedyncza liczbe" << endl;
+                        	cin >> pojedyncza;
+                    	}while(pojedyncza<1 || pojedyncza>37);
+						Pojedyncza(pojedyncza);
+                    	sprawdzKoniec();
+						break;
 
-			case 2: do{
+			case 2: 
+					do{
                         cout << "Obstaw parzysta lub nieparzysta 0 - Parzysta, 1 - Nieparzysta" << endl;
                         cin >> parzysta;
                     }while(parzysta<0 || parzysta>1);
-					PrzystaNieparzysta(parzysta, Pula);
+					PrzystaNieparzysta(parzysta);
                     sprawdzKoniec();
 					break;
-			case 3:
-                    Tuziny(Pula);
+			case 3: 
+                    Tuziny();
                     sprawdzKoniec();
 					break;
 			case 4:
@@ -173,21 +176,25 @@ srand(time(NULL));
 					cin >> liczba3;
 					break;
 			case 5:
-                    cout << "Wprowadz 2 liczby obok siebie" << endl;
-					cin >> liczba4;
-					cin >> liczba5;
+					do{
+                        cout << "Obstaw dwie dowolne liczby od 1-37" << endl;
+                        cin >> PierwszaDowolna;
+                        cin >> DrugaDowolna;
+                    }while(1<DrugaDowolna>38 && 1<PierwszaDowolna>38);
 					break;
 			default: cout << "Podaj jeszcze raz" << endl;
 					break;
 		}
-	}while(n!=0);
+		Pauza();
+		Czysc();
+	}while(OpcjaLosowania!=0);
 
     return 0;
 }
 
 
 
-int Pojedyncza(int Pojedyncza, int Pula){
+int Pojedyncza(int Pojedyncza){
 
     int losowana;
     losowana = rand()%38;
@@ -216,11 +223,10 @@ int Pojedyncza(int Pojedyncza, int Pula){
 
 
 	cout<<"\nTwoj aktualny stan konta:"<<KontoGracza<<endl;
-
 	return 0;
 }
 
-int PrzystaNieparzysta(int PrzystaNieparzysta, int Pula){
+int PrzystaNieparzysta(int PrzystaNieparzysta){
 
     int losowana;
     losowana = rand()%37;
@@ -267,11 +273,11 @@ int PrzystaNieparzysta(int PrzystaNieparzysta, int Pula){
 
 
 	cout<<"\nTwoj aktualny stan konta:"<<KontoGracza<<endl;
-
+	
 	return 0;
 }
 
-int Tuziny(int Pula){
+void Tuziny(){
 
     int iletuzinow, TylkoJedenTuzin;
     //zakladamy ze mozna obstawic tylko 1 tuzin
@@ -352,9 +358,7 @@ int Tuziny(int Pula){
     }
 
 	cout<<"\nTwoj aktualny stan konta:"<<KontoGracza<<endl;
-
-    return 0;
-}
+	}
 
 
 
