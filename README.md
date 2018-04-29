@@ -1,3 +1,3 @@
 
-chuj
+nic
 # stolec-ruleta
